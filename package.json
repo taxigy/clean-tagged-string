@@ -1,6 +1,6 @@
 {
   "name": "clean-tagged-string",
-  "version": "0.0.1b1",
+  "version": "0.0.1b2",
   "description": "A simple utility function to clean ES6 template strings.",
   "main": "index.js",
   "scripts": {
