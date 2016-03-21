@@ -35,7 +35,7 @@ import clean from 'clean-tagged-string';
 
 const username = null;
 
-console.log(`
+console.log(clean`
   Hello, ${username}, glad you asked!
   This tiny little tagged string function cleans extra spaces,
   so you don't have to worry about spaces and line breaks and also
