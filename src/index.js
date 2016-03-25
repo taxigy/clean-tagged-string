@@ -5,10 +5,10 @@ export default function clean(strings, ...values) {
     throw new Error('Use clean as a tag for template string, e.g. clean`123`, not clean(`123`).');
   } else {
     const joined = _.join(_.flatten(_.zip(strings, values)), '');
-    const cleaned = _.replace(joined, /([.,!?])?\s*([.,!?])/g, '$2');
-    const trimmed = _.replace(cleaned, /^\s*(.*)\s*$/, '$1');
-    const shortened = _.replace(trimmed, /\s{2,}/g, ' ');
+    const cleaned = _.replace(joined, /(([.,!?])?\s*){1,}([.,!?])/g, '$2');
+    const shortened = _.replace(cleaned, /\s{2,}|\n{1,}/g, ' ');
+    const trimmed = _.replace(shortened, /^\W*(.*?)\s*$/, '$1');
 
-    return shortened;
+    return trimmed;
   }
 }
