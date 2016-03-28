@@ -7,7 +7,7 @@ export default function clean(strings, ...values) {
     const joined = _.join(_.flatten(_.zip(strings, values)), '');
     const cleaned = _.replace(joined, /(([.,!?])?\s*){1,}([.,!?])/g, '$3');
     const shortened = _.replace(cleaned, /\s{2,}|\n{1,}/g, ' ');
-    const trimmed = _.replace(shortened, /^\W*(.*?)\s*$/, '$1');
+    const trimmed = _.replace(shortened, /^[\s.,!?]*(.*?)\s*$/, '$1');
 
     return trimmed;
   }

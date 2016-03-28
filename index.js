@@ -22,7 +22,7 @@ function clean(strings) {
     var joined = _lodash2.default.join(_lodash2.default.flatten(_lodash2.default.zip(strings, values)), '');
     var cleaned = _lodash2.default.replace(joined, /(([.,!?])?\s*){1,}([.,!?])/g, '$3');
     var shortened = _lodash2.default.replace(cleaned, /\s{2,}|\n{1,}/g, ' ');
-    var trimmed = _lodash2.default.replace(shortened, /^\W*(.*?)\s*$/, '$1');
+    var trimmed = _lodash2.default.replace(shortened, /^[\s.,!?]*(.*?)\s*$/, '$1');
 
     return trimmed;
   }
