@@ -49,3 +49,18 @@ Output:
 ```
 Hello, glad you asked! This tiny little tagged string function cleans extra spaces, so you don't have to worry about spaces and line breaks and also undefined values that don't render properly. The "clean" function takes care of that.
 ```
+
+## Applying expansion function against values
+
+You can use `clean` with your own function that will be applied
+to every value you pass into the template literal:
+
+```javascript
+console.log(clean(e => e * 2)`It's only ${100}!`);
+```
+
+Output:
+
+```
+It's only 200!
+```
