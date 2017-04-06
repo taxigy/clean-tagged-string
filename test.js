@@ -99,3 +99,13 @@ test('Does not allow a prototype as one of the template values.', t => {
 
   t.is(source, target);
 });
+
+//
+// Curry
+//
+test('Applies a function to all the values, then produces the string.', t => {
+  const source = clean(e => e * 2)`It's only ${100}!`;
+  const target = 'It\'s only 200!';
+
+  t.is(source, target);
+});
