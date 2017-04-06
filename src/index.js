@@ -1,25 +1,19 @@
-import _ from 'lodash';
+const shouldBeIncluded = value => !(typeof value === 'undefined' || typeof value === 'function' || value === null || (value instanceof Array && value.length === 0) || (typeof value === 'object' && (Object.keys(value).length === 0)));
 
-export default function clean(...args) {
-  if (!_.first(args)) {
-    throw new Error('Use clean as a tag for template string, e.g. clean`Hello, ${username}`.');
-  } else if (_.isFunction(_.first(args))) {
-    const expand = _.first(args);
-
-    return (strings, ...values) => clean(strings, ...values.map(e => expand(e)));
-  } else if (_.first(args).raw) {
-    const expand = _.isFunction(args[0]) ? args[0] : e => e;
-    const strings = _.isFunction(args[0]) ? args[1] : args[0];
-    const values = _.slice(args, _.isFunction(args[0]) ? 2 : 1);
-    const joined = _.join(_.flatten(_.zip(strings, _.map(values, expand))), '');
-    const cleaned = _.replace(joined, /(([.,!?])?\s*){1,}([.,!?])/g, '$3');
-    const shortened = _.replace(cleaned, /\s{2,}|\n{1,}/g, ' ');
-    const trimmed = _.replace(shortened, /^[\s.,!?]*(.*?)\s*$/, '$1');
-
-    return trimmed;
-  } else if (_.size(args) === 1) {
-    return _.first(args);
-  } else {
-    return args;
+export default function clean(first, ...rest) {
+  if (!first) {
+    return '';
+  } else if (typeof first === 'function' || first instanceof Function) {
+    return (strings, ...values) => clean(strings, ...values.map(e => first(e)));
+  } else if (typeof first === 'object' && first.raw && first.map) {
+    return first.reduce((total, current, index) => {
+      if (index === 0) {
+        return current;
+      } else if (shouldBeIncluded(rest[index - 1])) {
+        return `${total}${rest[index - 1]}${current}`;
+      } else {
+        return `${total}${current}`;
+      }
+    }).replace(/(([.,!?])?\s*){1,}([.,!?])/g, '$3').replace(/\s{2,}|\n{1,}/g, ' ').replace(/^[\s.,!?]*(.*?)\s*$/g, '$1');
   }
 }
