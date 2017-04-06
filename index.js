@@ -41,6 +41,10 @@ function clean(first) {
         return '' + total + current;
       }
     }).replace(/(([.,!?])?\s*){1,}([.,!?])/g, '$3').replace(/\s{2,}|\n{1,}/g, ' ').replace(/^[\s.,!?]*(.*?)\s*$/g, '$1');
+  } else if (rest.length === 0) {
+    return first;
+  } else {
+    return [first].concat(rest);
   }
 }
 module.exports = exports['default'];

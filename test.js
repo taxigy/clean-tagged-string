@@ -61,6 +61,20 @@ test('Is okay with as many values at any location of the template string.', t =>
   t.is(source, target);
 });
 
+test('Returns the first and only argument as is, as clean(str) instead of clean`str`.', t => {
+  const source = clean('Hello.');
+  const target = 'Hello.';
+
+  t.is(source, target);
+});
+
+test('Returns an array when used with more than one argument, as clean(str, str) instead of clean`str str`.', t => {
+  const source = clean('Hello.', 'Hello.');
+  const target = ['Hello.', 'Hello.'];
+
+  t.deepEqual(source, target);
+});
+
 //
 // Weird stuff
 //
@@ -106,6 +120,20 @@ test('Does not allow a prototype as one of the template values.', t => {
 test('Applies a function to all the values, then produces the string.', t => {
   const source = clean(e => e * 2)`It's only ${100}!`;
   const target = 'It\'s only 200!';
+
+  t.is(source, target);
+});
+
+test('Does not yet support double currying.', t => {
+  const source = clean(e => e * 2)(e => e * 2)`It's only ${100}!`;
+  const target = 'It\'s only 200!'; // could have been 400, but nope.
+
+  t.is(source, target);
+});
+
+test('Does not yet support triple currying.', t => {
+  const source = clean(e => e * 2)(e => e * 2)`It's only ${100}!`;
+  const target = 'It\'s only 200!'; // and this one could have been 600, but nope.
 
   t.is(source, target);
 });
