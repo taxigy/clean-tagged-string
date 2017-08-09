@@ -1,4 +1,9 @@
 # clean-tagged-string
+
+```bash
+yarn add clean-tagged-string
+```
+
 A simple utility function to clean ES6 tagged template strings, a super simple
 one.
 
