@@ -4,8 +4,7 @@
 yarn add clean-tagged-string
 ```
 
-A simple utility function to clean ES6 tagged template strings, a super simple
-one.
+A simple utility function to clean ES6 tagged template strings.
 
 Without `clean`:
 
@@ -69,3 +68,11 @@ Output:
 ```
 It's only 200!
 ```
+
+---
+
+Attention! Beginning with version 0.0.6, the module uses ES2017
+syntax. It's fine if you intend to run it as is in any modern
+browser, but if you intend to support older browsers, too, please
+make sure to transpile it into ES5 in your build pipeline.
+Thanks!

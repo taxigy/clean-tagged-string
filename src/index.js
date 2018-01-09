@@ -1,6 +1,6 @@
 const shouldBeIncluded = value => !(typeof value === 'undefined' || typeof value === 'function' || value === null || (value instanceof Array && value.length === 0) || (typeof value === 'object' && (Object.keys(value).length === 0)));
 
-export default function clean(first, ...rest) {
+function clean(first, ...rest) {
   if (!first) {
     return '';
   } else if (typeof first === 'function' || first instanceof Function) {
@@ -21,3 +21,5 @@ export default function clean(first, ...rest) {
     return [first, ...rest];
   }
 }
+
+module.exports = clean;
